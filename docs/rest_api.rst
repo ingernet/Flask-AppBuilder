@@ -1346,6 +1346,8 @@ Many to Many relations
 Until now we have only tested one to many relations, let's see how to handle many to many relationships.
 First we need to change our models, on this example we are going to add **tags** to our **Contacts**::
 
+    from sqlalchemy import Table
+    
     class Tag(Model):
         id = Column(Integer, primary_key=True)
         name = Column(String(50), unique=True, nullable=False)
@@ -1405,7 +1407,7 @@ To create a contact with some tags::
     $ -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN"
     {"id":1,"result":{"address":null,"birthday":null,"contact_group":1,"gender":1,"name":"C1","personal_celphone":null,"personal_phone":null,"tags":[1,2]}}
 
-You can add a contact without any tags, if you want to enforce `tags` as a required field use the info dict from
+You can add a contact without any tags, but if you want to enforce `tags` as a required field, use the info dict from
 SQLAlchemy::
 
     class Contact(Model):
